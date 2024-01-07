@@ -8,9 +8,9 @@
 import UIKit
 import AVFoundation
 
-enum CameraError {
-    case invalidDeviceInput
-    case invalidScannedValue
+enum CameraError: String {
+    case invalidDeviceInput = "Something is wrong with the camera. We are unable to capture input."
+    case invalidScannedValue = "The value scanned is not valid. This app scans EAN-0 and EAN-13"
 }
 
 
@@ -88,6 +88,7 @@ final class ScannerVC: UIViewController {
         previewLayer!.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer!)
         
+       
         captureSession.startRunning()
     }
 }
@@ -112,6 +113,7 @@ extension ScannerVC: AVCaptureMetadataOutputObjectsDelegate {
             return
         }
         
+//        captureSession.stopRunning()
         scannerDelegate?.didFind(barcode: barcode)
     }
 }
